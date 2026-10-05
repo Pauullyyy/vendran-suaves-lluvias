@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vendrán suaves lluvias — Silvana Estrada</title>
+
+<style>
+
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(206,224,190,.55), transparent 28%),
+        radial-gradient(circle at 80% 30%, rgba(224,198,207,.38), transparent 25%),
+        linear-gradient(135deg, #dfe8d7, #f3eee2 48%, #d9e4d4);
+    color: #304232;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   FONDO DE BOSQUE
+========================================================= */
+
+.forest-background {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.mist {
+    position: absolute;
+    width: 700px;
+    height: 250px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.22);
+    filter: blur(50px);
+    animation: mistMove 12s ease-in-out infinite alternate;
+}
+
+.mist.one {
+    top: 15%;
+    left: -10%;
+}
+
+.mist.two {
+    bottom: 10%;
+    right: -15%;
+    animation-delay: -5s;
+}
+
+@keyframes mistMove {
+    from {
+        transform: translateX(-30px);
+    }
+
+    to {
+        transform: translateX(100px);
+    }
+}
+
+
+/* =========================================================
+   LLUVIA
+========================================================= */
+
+.rain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+    overflow: hidden;
+}
+
+.drop {
+    position: absolute;
+    top: -40px;
+    width: 1px;
+    height: 45px;
+    background: linear-gradient(
+        transparent,
+        rgba(73, 105, 83, .45)
+    );
+    animation: rainFall linear infinite;
+}
+
+@keyframes rainFall {
+
+    from {
+        transform: translateY(-50px) translateX(0);
+    }
+
+    to {
+        transform: translateY(110vh) translateX(80px);
+    }
+
+}
+
+
+/* =========================================================
+   PARTICULAS MÁGICAS
+========================================================= */
+
+.sparkles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 15;
+}
+
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #f7e9b7;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #fff1bb;
+    animation: sparkleFloat 5s ease-in-out infinite;
+}
+
+@keyframes sparkleFloat {
+
+    0%,100% {
+        opacity: .1;
+        transform: translateY(0) scale(.7);
+    }
+
+    50% {
+        opacity: .9;
+        transform: translateY(-25px) scale(1.2);
+    }
+
+}
+
+/* =========================================================
+   FLORES DECORATIVAS
+========================================================= */
+
+.flower {
+    position: fixed;
+    z-index: 3;
+    pointer-events: none;
+    opacity: .75;
+    animation: flowerFloat 7s ease-in-out infinite;
+}
+
+.flower span {
+    display: block;
+    position: absolute;
+    width: 17px;
+    height: 28px;
+    background: #c99ba0;
+    border-radius: 70% 30% 70% 30%;
+    transform-origin: bottom center;
+}
+
+.flower span:nth-child(1) {
+    transform: rotate(0deg) translateY(-12px);
+}
+
+.flower span:nth-child(2) {
+    transform: rotate(72deg) translateY(-12px);
+}
+
+.flower span:nth-child(3) {
+    transform: rotate(144deg) translateY(-12px);
+}
+
+.flower span:nth-child(4) {
+    transform: rotate(216deg) translateY(-12px);
+}
+
+.flower span:nth-child(5) {
+    transform: rotate(288deg) translateY(-12px);
+}
+
+.flower::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #e7c879;
+    border-radius: 50%;
+    left: 3px;
+    top: 3px;
+}
+
+.flower.left {
+    left: 2%;
+    top: 30%;
+}
+
+.flower.right {
+    right: 3%;
+    top: 70%;
+    transform: scale(.75);
+}
+
+@keyframes flowerFloat {
+
+    0%,100% {
+        transform: rotate(-4deg) translateY(0);
+    }
+
+    50% {
+        transform: rotate(5deg) translateY(-12px);
+    }
+
+}
+
+
+/* =========================================================
+   HOJAS
+========================================================= */
+
+.leaf {
+    position: fixed;
+    z-index: 4;
+    pointer-events: none;
+    width: 75px;
+    height: 35px;
+    background: #536b4e;
+    border-radius: 100% 0 100% 0;
+    opacity: .35;
+}
+
+.leaf.one {
+    top: 12%;
+    left: -20px;
+    transform: rotate(30deg);
+}
+
+.leaf.two {
+    bottom: 15%;
+    right: -20px;
+    transform: rotate(210deg);
+}
+
+.leaf.three {
+    top: 48%;
+    right: 2%;
+    transform: rotate(70deg) scale(.7);
+}
+
+
+/* =========================================================
+   CONTENEDOR
+========================================================= */
+
+.container {
+    width: min(1100px, 92%);
+    margin: auto;
+    position: relative;
+    z-index: 5;
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+nav {
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #405540;
+}
+
+.nav-button {
+    border: 1px solid rgba(52,73,54,.25);
+    background: rgba(255,255,255,.35);
+    padding: 10px 17px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #304232;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    transition: .3s;
+}
+
+.nav-button:hover {
+    background: #405a43;
+    color: white;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 650px;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 70px;
+    align-items: center;
+    padding: 40px 0 100px;
+}
+
+.eyebrow {
+    color: #a8665c;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: clamp(55px, 8vw, 105px);
+    line-height: .84;
+    font-weight: normal;
+    letter-spacing: -6px;
+    color: #2e4431;
+    text-shadow: 2px 3px 0 rgba(255,255,255,.35);
+}
+
+.title span {
+    color: #9d6966;
+    font-style: italic;
+}
+
+.hero-text {
+    max-width: 600px;
+    margin-top: 30px;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #59675a;
+}
+
+.info-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.pill {
+    border: 1px solid rgba(50,70,53,.2);
+    background: rgba(255,255,255,.35);
+    border-radius: 50px;
+    padding: 9px 13px;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   PORTADA
+========================================================= */
+
+.album-container {
+    position: relative;
+    max-width: 420px;
+    margin: auto;
+}
+
+.album-container::before {
+    content: "";
+    position: absolute;
+    inset: -25px;
+    border: 1px solid rgba(68,91,66,.25);
+    border-radius: 50%;
+    transform: rotate(-8deg);
+}
+
+.album-container::after {
+    content: "✦";
+    position: absolute;
+    top: -30px;
+    right: -20px;
+    color: #c4a36a;
+    font-size: 28px;
+    animation: sparkle 3s infinite;
+}
+
+.album-cover {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow:
+        0 30px 60px rgba(38,58,41,.25),
+        0 0 0 8px rgba(255,255,255,.22);
+    transform: rotate(2deg);
+}
+
+.cover-caption {
+    text-align: right;
+    margin-top: 18px;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #687166;
+}
+
+
+/* =========================================================
+   SECCIONES
+========================================================= */
+
+section {
+    margin-bottom: 100px;
+}
+
+.section-title {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(55,76,57,.2);
+    padding-bottom: 13px;
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    font-size: 38px;
+    font-weight: normal;
+    letter-spacing: -2px;
+}
+
+.section-title span {
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #697368;
+}
+
+
+/* =========================================================
+   HISTORIA
+========================================================= */
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.story-card {
+    background: rgba(255,255,255,.48);
+    backdrop-filter: blur(7px);
+    border: 1px solid rgba(52,73,54,.13);
+    border-radius: 25px;
+    padding: 28px;
+    transition: .4s;
+}
+
+.story-card:hover {
+    transform: translateY(-6px) rotate(.3deg);
+    background: rgba(255,255,255,.65);
+}
+
+.story-number {
+    color: #a8675d;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.story-card h3 {
+    font-size: 25px;
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.story-card p {
+    color: #616b61;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.timeline {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+}
+
+.timeline-button {
+    text-align: left;
+    min-height: 120px;
+    border: 1px solid rgba(52,73,54,.15);
+    border-radius: 18px;
+    padding: 18px;
+    background: rgba(255,255,255,.35);
+    cursor: pointer;
+    color: #304232;
+    transition: .3s;
+}
+
+.timeline-button:hover {
+    transform: translateY(-3px);
+}
+
+.timeline-button.active {
+    background: #405843;
+    color: #f6f1e6;
+}
+
+.timeline-button strong {
+    display: block;
+    font-size: 19px;
+    font-weight: normal;
+    margin-bottom: 8px;
+}
+
+.timeline-button small {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+}
+
+.timeline-content {
+    margin-top: 12px;
+    background: rgba(255,255,255,.55);
+    padding: 25px;
+    border-radius: 20px;
+    line-height: 1.7;
+    color: #5c665d;
+}
+
+
+/* =========================================================
+   TRACKLIST
+========================================================= */
+
+.tracks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+}
+
+.track {
+    border: 1px solid rgba(52,73,54,.13);
+    background: rgba(255,255,255,.4);
+    border-radius: 15px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    color: #304232;
+    transition: .3s;
+    text-align: left;
+}
+
+.track:hover {
+    transform: translateX(4px);
+    background: rgba(255,255,255,.7);
+}
+
+.track.active {
+    background: #eadbd2;
+    border-color: #b77d79;
+}
+
+.track-number {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    color: #a8665c;
+}
+
+.track-name {
+    flex: 1;
+    font-size: 16px;
+}
+
+.track-time {
+    font-family: Arial, sans-serif;
+    color: #758074;
+    font-size: 10px;
+}
+
+.track-description {
+    margin-top: 15px;
+    background: #405843;
+    color: #f4eee2;
+    padding: 22px;
+    border-radius: 20px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   BLOQUE DE LLUVIA
+========================================================= */
+
+.magic-box {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(47,70,50,.96),
+            rgba(73,95,70,.93)
+        );
+    color: white;
+    border-radius: 30px;
+    padding: 40px;
+}
+
+.magic-box::before {
+    content: "✿";
+    position: absolute;
+    font-size: 150px;
+    color: rgba(255,255,255,.04);
+    right: 20px;
+    bottom: -40px;
+}
+
+.magic-box h2 {
+    font-size: 37px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.magic-box p {
+    color: #d9e0d5;
+    max-width: 600px;
+    line-height: 1.7;
+}
+
+.slider-container {
+    margin-top: 30px;
+}
+
+.slider-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: #d5b29d;
+}
+
+
+/* =========================================================
+   FRASE FINAL
+========================================================= */
+
+.final-quote {
+    max-width: 800px;
+    margin: 100px auto 30px;
+    text-align: center;
+    font-size: 31px;
+    line-height: 1.4;
+    color: #344835;
+}
+
+.final-note {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #778074;
+    padding-bottom: 50px;
+}
+
+
+/* =========================================================
+   ANIMACIONES
+========================================================= */
+
+.fade-in {
+    animation: fadeIn 1.3s ease forwards;
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes sparkle {
+
+    0%,100% {
+        opacity: .3;
+        transform: scale(.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:750px) {
+
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .story-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tracks {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        letter-spacing: -3px;
+    }
+
+}
+
+@media(max-width:480px) {
+
+    nav {
+        align-items: flex-start;
+    }
+
+    .hero {
+        padding-top: 20px;
+    }
+
+    .title {
+        font-size: 55px;
+    }
+
+    .timeline {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        display: block;
+    }
+
+    .section-title span {
+        display: block;
+        margin-top: 8px;
+    }
+
+    .magic-box {
+        padding: 25px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     FONDO
+===================================================== -->
+
+<div class="forest-background">
+    <div class="mist one"></div>
+    <div class="mist two"></div>
+</div>
+
+<div class="rain" id="rain"></div>
+
+<div class="sparkles" id="sparkles"></div>
+
+
+<!-- FLORES -->
+
+<div class="flower left">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div class="flower right">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+
+<div class="leaf one"></div>
+<div class="leaf two"></div>
+<div class="leaf three"></div>
+
+
+<!-- =====================================================
+     CONTENIDO
+===================================================== -->
+
+<div class="container">
+
+<nav>
+
+    <div class="logo">
+        Silvana Estrada · 2025
+    </div>
+
+    <div style="display:flex; gap:8px;">
+
+        <button class="nav-button" id="musicButton">
+            ♫ Música
+        </button>
+
+        <button class="nav-button" id="rainButton">
+            cambiar lluvia
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<header class="hero">
+
+    <div class="fade-in">
+
+        <div class="eyebrow">
+            un archivo sobre volver a la luz
+        </div>
+
+        <h1 class="title">
+            Vendrán<br>
+            suaves<br>
+            <span>lluvias</span>
+        </h1>
+
+        <p class="hero-text">
+
+            El segundo álbum de estudio de Silvana Estrada:
+            un recorrido íntimo por el duelo, la pérdida,
+            el amor, la belleza y esa pequeña esperanza
+            que aparece después de atravesar lo difícil.
+
+        </p>
+
+
+        <div class="info-pills">
+
+            <div class="pill">
+                10 canciones
+            </div>
+
+            <div class="pill">
+                2025
+            </div>
+
+            <div class="pill">
+                Silvana Estrada
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PORTADA -->
+
+    <div class="album-container fade-in">
+
+        <img
+            class="album-cover"
+            src="Imagenes/portada.jpg"
+            alt="Portada de Vendrán suaves lluvias">
+
+        <div class="cover-caption">
+            la lluvia después de marchita
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     HISTORIA
+===================================================== -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>
+            ¿De dónde nace?
+        </h2>
+
+        <span>
+            el corazón del disco
+        </span>
+
+    </div>
+
+
+    <div class="story-grid">
+
+
+        <article class="story-card">
+
+            <div class="story-number">
+                01 · una necesidad
+            </div>
+
+            <h3>
+                Volver a enamorarse de la vida
+            </h3>
+
+            <p>
+
+                Después de años de giras y de atravesar
+                pérdidas personales, Silvana describe el
+                disco como una necesidad de volver a
+                conectar con la belleza.
+
+                El álbum no intenta borrar el dolor:
+                busca caminar con él sin dejar de mirar
+                hacia lo luminoso.
+
+            </p>
+
+        </article>
+
+
+        <article class="story-card">
+
+            <div class="story-number">
+                02 · una imagen
+            </div>
+
+            <h3>
+                La lluvia como promesa
+            </h3>
+
+            <p>
+
+                El título nace del poema
+                <i>There Will Come Soft Rains</i>,
+                de Sara Teasdale.
+
+                La lluvia aparece como una imagen
+                relacionada con la naturaleza y con
+                la posibilidad de que algo vuelva a
+                crecer después de una etapa difícil.
+
+            </p>
+
+        </article>
+
+
+        <article class="story-card">
+
+            <div class="story-number">
+                03 · una transformación
+            </div>
+
+            <h3>
+                Del marchitarse a florecer
+            </h3>
+
+            <p>
+
+                En el imaginario de Silvana,
+                <i>Marchita</i> y
+                <i>Vendrán suaves lluvias</i>
+                pueden sentirse conectados.
+
+                Una flor cae, llega la lluvia
+                y después existe la posibilidad
+                de volver a florecer.
+
+            </p>
+
+        </article>
+
+
+        <article class="story-card">
+
+            <div class="story-number">
+                04 · hacerlo a su manera
+            </div>
+
+            <h3>
+                Instinto antes que perfección
+            </h3>
+
+            <p>
+
+                Silvana escribió y produjo el álbum.
+                El proceso fue largo y cambiante:
+                algunas canciones comenzaron durante
+                la pandemia y otras aparecieron
+                posteriormente.
+
+                El resultado mezcla sensibilidad,
+                instrumentos acústicos y raíces
+                latinoamericanas con arreglos amplios.
+
+            </p>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROCESO
+===================================================== -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>
+            El proceso
+        </h2>
+
+        <span>
+            toca una etapa
+        </span>
+
+    </div>
+
+
+    <div class="timeline">
+
+
+        <button
+            class="timeline-button active"
+            data-story="pandemia">
+
+            <strong>
+                2020–21
+            </strong>
+
+            <small>
+                Primeras canciones
+                y comienzo del proceso.
+            </small>
+
+        </button>
+
+
+        <button
+            class="timeline-button"
+            data-story="transicion">
+
+            <strong>
+                Los años siguientes
+            </strong>
+
+            <small>
+                Giras, cambios
+                y pérdidas personales.
+            </small>
+
+        </button>
+
+
+        <button
+            class="timeline-button"
+            data-story="grabacion">
+
+            <strong>
+                Grabación
+            </strong>
+
+            <small>
+                Montreal · Barcelona
+                · Ciudad de México.
+            </small>
+
+        </button>
+
+
+        <button
+            class="timeline-button"
+            data-story="lanzamiento">
+
+            <strong>
+                17.10.2025
+            </strong>
+
+            <small>
+                El álbum llega
+                al mundo.
+            </small>
+
+        </button>
+
+
+    </div>
+
+
+    <div
+        class="timeline-content"
+        id="timelineContent">
+
+        <strong>
+            2020–21.
+        </strong>
+
+        Algunas canciones comenzaron a escribirse
+        durante la pandemia. El proyecto terminó
+        convirtiéndose en una especie de recorrido
+        emocional por varios años de la vida de Silvana.
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TRACKLIST
+===================================================== -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>
+            Las diez lluvias
+        </h2>
+
+        <span>
+            tracklist
+        </span>
+
+    </div>
+
+
+    <div class="tracks" id="tracks"></div>
+
+
+    <div
+        class="track-description"
+        id="trackDescription">
+
+        <strong>
+            Selecciona una canción.
+        </strong>
+
+        <br>
+
+        Recorre las diez canciones del álbum
+        y descubre su lugar dentro de este viaje.
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LLUVIA INTERACTIVA
+===================================================== -->
+
+<section>
+
+    <div class="magic-box">
+
+        <h2>
+            Haz que llueva.
+        </h2>
+
+        <p>
+
+            La lluvia es el hilo visual de esta página:
+            no como una tormenta, sino como algo suave
+            que llega después de un periodo difícil.
+
+            Cambia su intensidad y deja que el bosque
+            cambie contigo.
+
+        </p>
+
+
+        <div class="slider-container">
+
+            <div class="slider-label">
+
+                <span>
+                    intensidad
+                </span>
+
+                <span id="rainValue">
+                    suave
+                </span>
+
+            </div>
+
+
+            <input
+                type="range"
+                id="rainSlider"
+                min="1"
+                max="3"
+                value="1">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FRASE FINAL
+===================================================== -->
+
+<div class="final-quote">
+
+    <i>
+        Un disco que no intenta negar la tristeza;
+        intenta encontrar belleza suficiente
+        para seguir caminando.
+    </i>
+
+</div>
+
+
+<div class="final-note">
+
+    Vendrán suaves lluvias · Silvana Estrada · 2025
+
+</div>
+
+
+</div>
+
+<audio id="backgroundMusic" loop preload="metadata">
+    <source src="Musica/musica.mp3" type="audio/mpeg">
+</audio>
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   LLUVIA
+===================================================== */
+
+const rain = document.getElementById("rain");
+
+const numberOfDrops = 85;
+
+
+for (let i = 0; i < numberOfDrops; i++) {
+
+    const drop = document.createElement("span");
+
+    drop.classList.add("drop");
+
+    drop.style.left =
+        Math.random() * 105 + "%";
+
+    drop.style.animationDuration =
+        (1.5 + Math.random() * 3) + "s";
+
+    drop.style.animationDelay =
+        (-Math.random() * 5) + "s";
+
+    drop.style.opacity =
+        0.15 + Math.random() * 0.5;
+
+    rain.appendChild(drop);
+
+}
+
+
+
+/* =====================================================
+   PARTÍCULAS MÁGICAS
+===================================================== */
+
+const sparkles =
+    document.getElementById("sparkles");
+
+
+for (let i = 0; i < 35; i++) {
+
+    const sparkle =
+        document.createElement("span");
+
+    sparkle.classList.add("sparkle");
+
+    sparkle.style.left =
+        Math.random() * 100 + "%";
+
+    sparkle.style.top =
+        Math.random() * 100 + "%";
+
+    sparkle.style.animationDelay =
+        Math.random() * 5 + "s";
+
+    sparkles.appendChild(sparkle);
+
+}
+
+
+
+/* =====================================================
+   INTENSIDAD DE LLUVIA
+===================================================== */
+
+const slider =
+    document.getElementById("rainSlider");
+
+const rainValue =
+    document.getElementById("rainValue");
+
+const rainButton =
+    document.getElementById("rainButton");
+
+
+const levels = {
+
+    1: {
+        name: "suave",
+        opacity: .45,
+        speed: 1
+    },
+
+    2: {
+        name: "media",
+        opacity: .7,
+        speed: .7
+    },
+
+    3: {
+        name: "intensa",
+        opacity: .9,
+        speed: .45
+    }
+
+};
+
+
+function changeRain(level) {
+
+    const setting =
+        levels[level];
+
+    rain.style.opacity =
+        setting.opacity;
+
+    rainValue.textContent =
+        setting.name;
+
+
+    document
+        .querySelectorAll(".drop")
+        .forEach(drop => {
+
+            const randomSpeed =
+                1.5 + Math.random() * 3;
+
+            drop.style.animationDuration =
+                randomSpeed *
+                setting.speed +
+                "s";
+
+        });
+
+}
+
+
+slider.addEventListener(
+    "input",
+    function() {
+
+        changeRain(this.value);
+
+    }
+);
+
+
+rainButton.addEventListener(
+    "click",
+    function() {
+
+        let level =
+            Number(slider.value) + 1;
+
+        if (level > 3) {
+            level = 1;
+        }
+
+        slider.value = level;
+
+        changeRain(level);
+
+    }
+);
+
+/* =====================================================
+   MÚSICA DE FONDO
+===================================================== */
+
+const music =
+    document.getElementById("backgroundMusic");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+
+musicButton.addEventListener("click", async function() {
+
+    if (music.paused) {
+
+        try {
+
+            await music.play();
+
+            musicButton.textContent =
+                "❚❚ Pausar";
+
+        } catch (error) {
+
+            musicButton.textContent =
+                "♫ Reproducir";
+
+            console.log(
+                "No se pudo reproducir el audio:",
+                error
+            );
+
+        }
+
+    } else {
+
+        music.pause();
+
+        musicButton.textContent =
+            "♫ Música";
+
+    }
+
+});
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+const timelineButtons =
+    document.querySelectorAll(
+        ".timeline-button"
+    );
+
+const timelineContent =
+    document.getElementById(
+        "timelineContent"
+    );
+
+
+const stories = {
+
+    pandemia: `
+        <strong>2020–21.</strong>
+        Algunas canciones comenzaron a escribirse
+        durante la pandemia. El proyecto terminó
+        convirtiéndose en un recorrido emocional
+        por varios años de la vida de Silvana.
+    `,
+
+    transicion: `
+        <strong>Los años siguientes.</strong>
+        Después de <i>Marchita</i> llegaron años
+        de giras y una etapa marcada por cambios,
+        pérdidas y preguntas personales.
+
+        El nuevo disco nació de la necesidad
+        de encontrar belleza dentro de ese momento.
+    `,
+
+    grabacion: `
+        <strong>Grabación.</strong>
+        El álbum fue trabajado entre Montreal,
+        Barcelona y Ciudad de México.
+
+        Silvana produjo el proyecto y desarrolló
+        una paleta que une instrumentos acústicos,
+        raíces latinoamericanas y arreglos amplios.
+    `,
+
+    lanzamiento: `
+        <strong>17 de octubre de 2025.</strong>
+        <i>Vendrán suaves lluvias</i> fue publicado
+        como un álbum de diez canciones.
+
+        Su recorrido propone pasar del peso de
+        la pérdida hacia el movimiento,
+        la belleza y la esperanza.
+    `
+
+};
+
+
+timelineButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            timelineButtons.forEach(
+                b => b.classList.remove("active")
+            );
+
+            this.classList.add("active");
+
+            const story =
+                this.dataset.story;
+
+            timelineContent.innerHTML =
+                stories[story];
+
+        }
+    );
+
+});
+
+
+
+const tracks = [
+
+    ["01", "Cada Día Te Extraño Menos", "03:34"],
+
+    ["02", "Dime", "03:40"],
+
+    ["03", "Lila Alelí", "03:25"],
+
+    ["04", "Flores", "04:43"],
+
+    ["05", "Good Luck, Good Night", "04:21"],
+
+    ["06", "Tregua", "02:10"],
+
+    ["07", "Como Un Pájaro", "03:30"],
+
+    ["08", "Un Rayo de Luz", "04:37"],
+
+    ["09", "No Te Vayas Sin Saber", "03:44"],
+
+    ["10", "El Alma Mía", "04:29"]
+
+];
+
+
+const trackContainer =
+    document.getElementById("tracks");
+
+const trackDescription =
+    document.getElementById(
+        "trackDescription"
+    );
+
+
+tracks.forEach(track => {
+
+    const button =
+        document.createElement("button");
+
+    button.classList.add("track");
+
+    button.innerHTML = `
+
+        <span class="track-number">
+            ${track[0]}
+        </span>
+
+        <span class="track-name">
+            ${track[1]}
+        </span>
+
+        <span class="track-time">
+            ${track[2]}
+        </span>
+
+    `;
+
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            document
+                .querySelectorAll(".track")
+                .forEach(
+                    t => t.classList.remove("active")
+                );
+
+            this.classList.add("active");
+
+
+            trackDescription.innerHTML = `
+
+                <strong>
+                    ${track[0]} · ${track[1]}
+                </strong>
+
+                <br>
+
+                ${track[2]} · Esta canción forma
+                parte del recorrido de diez piezas
+                que construye
+                <i>Vendrán suaves lluvias</i>.
+
+            `;
+
+        }
+    );
+
+
+    trackContainer.appendChild(button);
+
+});
+
+</script>
+
+</body>
+</html
